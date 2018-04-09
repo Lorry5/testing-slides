@@ -707,6 +707,7 @@ getPokerHand
             </section>
 
             <section>
+                <h3>Задача</h3>
                 <blockquote>
                     Определить победителя в игре "покер на костях"
                 </blockquote>
@@ -715,7 +716,7 @@ getPokerHand
             <section>
                 <h3>Решение</h3>
                 <pre class="js size-XS"><code data-trim>
-// playPoker.js
+// lib/playPoker.js
 
 const getPokerHand = require('./getPokerHand');
 const pokerHands = [
@@ -735,7 +736,7 @@ function playPoker(firstDice, secondDice) {/* ... */}
             <section>
                 <h3>Решение</h3>
                 <pre class="js size-XS"><code data-trim>
-// playPoker.js
+// lib/playPoker.js
 
 function playPoker(firstDice, secondDice) {
     const first = getPokerHand(firstDice);
@@ -753,9 +754,19 @@ function playPoker(firstDice, secondDice) {
             </section>
 
             <section>
-                <h3>Как тестировать?</h3>
+                <img src="images/getPokerHand.svg" alt="getPokerHand">
             </section>
 
+            <section>
+                <img src="images/playPoker.svg" alt="playPoker">
+            </section>
+
+            <section>
+                <h3>Как тестировать?</h3>
+            </section>
+        </section>
+
+        <section>
             <section>
                 <h3>Mock-объект</h3>
                 <blockquote cite="https://ru.wikipedia.org/wiki/Mock-%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82">
@@ -763,6 +774,39 @@ function playPoker(firstDice, secondDice) {
                     «объект-имитация», а также «подставка») — тип объектов,
                     реализующих заданные аспекты моделируемого программного окружения.
                 </blockquote>
+            </section>
+
+            <section>
+                <img src="images/playPoker-mock.svg" alt="playPoker">
+            </section>
+
+            <section>
+                <h3>Пример</h3>
+                <pre class="js "><code data-trim>
+function getPokerHand(dice) {
+    return 'Пара';
+}
+                </code></pre>
+            </section>
+
+            <section>
+                <pre class="js size-XS"><code data-trim data-noescape>
+// lib/playPoker.js
+const getPokerHand = <span class="fragment grow">require('./getPokerHand');</span>
+const pokerHands = [/* ... */];
+
+function playPoker(firstDice, secondDice) {
+    const first = getPokerHand(firstDice);
+    const second = getPokerHand(secondDice);
+    const compareHands =
+        pokerHands.indexOf(first) -
+        pokerHands.indexOf(second);
+
+    return compareHands === 0
+        ? 'Ничья'
+        : compareHands > 0 ? 'Первый' : 'Второй';
+}
+                </code></pre>
             </section>
         </section>
 
@@ -781,8 +825,8 @@ proxyquire({string} request, {Object} stubs);
             </section>
 
             <section>
-        <pre class="js size-XS"><code data-trim>
-// playPoker.js
+                <pre class="js size-XS"><code data-trim>
+// lib/playPoker.js
 const getPokerHand = require('./getPokerHand');
 const pokerHands = [/* ... */];
 
@@ -797,7 +841,7 @@ function playPoker(firstDice, secondDice) {
         ? 'Ничья'
         : compareHands > 0 ? 'Первый' : 'Второй';
 }
-        </code></pre>
+                </code></pre>
             </section>
 
             <section>
